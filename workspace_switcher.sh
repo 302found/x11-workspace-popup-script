@@ -6,8 +6,8 @@
 # TODOs:
 # Rewrite in a context with direct access to the framebuffer?
 # Not need to switch workspaces to snap them
-# Combine key that calls this script with the one that switches to that ID
-# i.e.; flag-key + tab, etc,...
+# Combine key that calls this script with the one that switches to workspace
+# i.e.; flag-key + tab (tab, tab...), etc,...
 
 ROWS=2
 DISPLAY_SLEEP=5.67    # in sec, just long-enough to see popup b4 it's killed
@@ -16,7 +16,6 @@ LABEL_RATIO=0.75      # for each workspace snap
 DISPLAY_RATIO=0.2683  # TODO: dynamically calc?
 
 DEPS='awk bc magick mktemp wmctrl xrandr'  # TODO: versions of these (does it matter)?
-mn=`basename $0`
 
 usage()
 {
@@ -59,6 +58,7 @@ getOutputDims()
 }
 getLargestDisplay()
 {
+  dims_file="$1"
   largest=0
   largest_name=
   while read l
